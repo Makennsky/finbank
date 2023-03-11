@@ -5,14 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Server serves Http requests for our service
+// Server serves Http requests for service
 type Server struct {
-	store  *db.Store
+	store  db.Store
 	router *gin.Engine
 }
 
 // It creates new server instance
-func NewServer(store *db.Store) *Server {
+func NewServer(store db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
