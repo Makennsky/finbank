@@ -22,4 +22,7 @@ test:
 exec:
 	docker exec -it mypostgres psql -U root -d finbank
 
-.PHONY: postgres createdb dropdb migrateup, migratedown sqlc test exec
+server:
+	go run main.go
+
+.PHONY: postgres createdb dropdb migrateup, migratedown sqlc test exec server
