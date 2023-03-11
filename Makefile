@@ -1,5 +1,5 @@
 postgres: 
-	docker run --name mypostgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:15-alpine
+	docker run --name mypostgres -p 5433:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:15-alpine
 
 createdb:
 	docker exec -it mypostgres createdb --username=root --owner=root finbank
@@ -8,10 +8,10 @@ dropdb:
 	docker exec -it mypostgres dropdb finbank
 
 migrateup:
-	migrate --path db/migration -database "postgresql://root:secret@localhost:5432/finbank?sslmode=disable" -verbose up
+	migrate --path db/migration -database "postgresql://root:secret@localhost:5433/finbank?sslmode=disable" -verbose up
 
 migratedown:
-	migrate --path db/migration -database "postgresql://root:secret@localhost:5432/finbank?sslmode=disable" -verbose down
+	migrate --path db/migration -database "postgresql://root:secret@localhost:5433/finbank?sslmode=disable" -verbose down
 
 sqlc:
 	sqlc generate
