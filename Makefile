@@ -10,8 +10,14 @@ dropdb:
 migrateup:
 	migrate --path db/migration -database "postgresql://root:secret@localhost:5433/finbank?sslmode=disable" -verbose up
 
+migrateupstep:
+	migrate --path db/migration -database "postgresql://root:secret@localhost:5433/finbank?sslmode=disable" -verbose up 1
+
 migratedown:
 	migrate --path db/migration -database "postgresql://root:secret@localhost:5433/finbank?sslmode=disable" -verbose down
+
+migratedownstep:
+	migrate --path db/migration -database "postgresql://root:secret@localhost:5433/finbank?sslmode=disable" -verbose down 1
 
 sqlc:
 	sqlc generate
@@ -28,4 +34,4 @@ server:
 mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/Makennsky/finbank/db/sqlc Store
 
-.PHONY: postgres createdb dropdb migrateup, migratedown sqlc test exec server mock
+.PHONY: postgres createdb dropdb migrateup, migratedown sqlc test exec server mock migrateupstep migratedownstep
